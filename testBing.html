@@ -1,0 +1,130 @@
+<!--SKELETON FOR THIS PAGE IS TAKEN FROM http://msdn.microsoft.com/en-us/library/gg427601.aspx -->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+   <head>
+      <title></title>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	  <script src="file:///C:/work/data/temp/getlocs.js">FF3</script>
+	  <style type="text/css">
+		.crime  div{color: Black !important; overflow:visible !important;  }
+		.crime  a{color: Black !important; overflow:visible !important;  }
+		.crime_drugs  div{color: red !important;  font-size:10pt !important; }
+		
+
+	</style>
+      <script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0"></script>
+
+      <script type="text/javascript">
+         
+         var map = null;
+ 
+         function GetMap()
+         {
+            // Initialize the map
+            map = new Microsoft.Maps.Map(document.getElementById("mapDiv"),{credentials:"YOUR-BING-MAPS-API-KEY-GOES-HERE", mapTypeId:Microsoft.Maps.MapTypeId.road}); 
+
+         }
+		 
+		 var theft_from_the_person = [];var bicycle_theft = [];var anti_social_behaviour = [];var vehicle_crime = [];var possession_of_weapons = [];var shoplifting = [];var other_crime = [];var public_order = [];var drugs = [];var robbery = [];var criminal_damage_arson = [];var burglary = [];var other_theft = [];var violent_crime = [];
+
+		 
+		 function AddPin(){
+		 var locs = GetLocations();
+		 for(var i = 0; i < locs.length; i++){
+		 var location = new Microsoft.Maps.Location(locs[i].lat,locs[i].lon);
+			var pushpin = new Microsoft.Maps.Pushpin(location,{icon:'poi_' + locs[i].cat + '.png',text:locs[i].cat,typeName:'crime_drugs',width:180,height:200,anchor:new Microsoft.Maps.Point(10,39)});
+			   //map.entities.push(pushpin);
+			   eval(locs[i].cat.replace(/-/g,'_')).push(pushpin);
+			}
+			alert('Crime Data load complete');
+		}
+		
+		function ClearCategory(category){
+			for(var i = 0; i < eval(category).length; i++){
+				map.entities.remove(eval(category)[i]);
+			}
+		}
+		
+		function AddCategory(category){
+			for(var i = 0; i < eval(category).length; i++){
+				map.entities.push(eval(category)[i]);
+			}
+		}			  			  		
+         
+
+      </script>
+   </head>
+   <body onload="GetMap();">
+   <table width="100%" height="50%" border="2">
+   <tr>
+	<td>
+	<div id='mapDiv' style="position:relative; width:100%; height:800px;"></div>
+	</td>
+	
+	<td width="100">
+	
+	<input type="button" value="LOAD" onclick="AddPin()"/> 	  
+	<input type="button" value="Clear theft_from_the_person" onclick="ClearCategory('theft_from_the_person')"/> 	
+	<input type="button" value="Show theft_from_the_person" onclick="AddCategory('theft_from_the_person')"/> 	
+	
+<input type="button" value="Clear bicycle_theft" onclick="ClearCategory('bicycle_theft')"/> 
+<input type="button" value="Show bicycle_theft" onclick="AddCategory('bicycle_theft')"/> 
+
+<input type="button" value="Clear anti_social_behaviour" onclick="ClearCategory('anti_social_behaviour')"/> 
+<input type="button" value="Show anti_social_behaviour" onclick="AddCategory('anti_social_behaviour')"/> 
+
+
+<input type="button" value="Clear vehicle_crime" onclick="ClearCategory('vehicle_crime')"/> 
+<input type="button" value="Show vehicle_crime" onclick="AddCategory('vehicle_crime')"/> 
+
+
+<input type="button" value="Clear possession_of_weapons" onclick="ClearCategory('possession_of_weapons')"/> 
+<input type="button" value="Show possession_of_weapons" onclick="AddCategory('possession_of_weapons')"/> 
+
+
+
+<input type="button" value="Clear shoplifting" onclick="ClearCategory('shoplifting')"/> 
+<input type="button" value="Show shoplifting" onclick="AddCategory('shoplifting')"/> 
+
+
+<input type="button" value="Clear other_crime" onclick="ClearCategory('other_crime')"/> 
+<input type="button" value="Show other_crime" onclick="AddCategory('other_crime')"/> 
+
+
+<input type="button" value="Clear public_order" onclick="ClearCategory('public_order')"/> 
+<input type="button" value="Show public_order" onclick="AddCategory('public_order')"/> 
+
+
+<input type="button" value="Clear drugs" onclick="ClearCategory('drugs')"/> 
+<input type="button" value="Show drugs" onclick="AddCategory('drugs')"/> 
+
+
+<input type="button" value="Clear robbery" onclick="ClearCategory('robbery')"/> 
+<input type="button" value="Show robbery" onclick="AddCategory('robbery')"/> 
+
+
+<input type="button" value="Clear criminal_damage_arson" onclick="ClearCategory('criminal_damage_arson')"/> 
+<input type="button" value="Show criminal_damage_arson" onclick="AddCategory('criminal_damage_arson')"/> 
+
+
+<input type="button" value="Clear burglary" onclick="ClearCategory('burglary')"/> 
+<input type="button" value="Show burglary" onclick="AddCategory('burglary')"/> 
+
+
+<input type="button" value="Clear other_theft" onclick="ClearCategory('other_theft')"/> 
+<input type="button" value="Show other_theft" onclick="AddCategory('other_theft')"/> 
+
+
+<input type="button" value="Clear violent_crime" onclick="ClearCategory('violent_crime')"/> 
+<input type="button" value="Show violent_crime" onclick="AddCategory('violent_crime')"/> 
+	
+	</td>
+	</td>
+   </tr>
+   
+   </table>
+      
+      
+   </body>
+</html>
